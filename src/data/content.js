@@ -27,6 +27,15 @@ export const about = [
 
 export const projects = [
   {
+    title: 'LLM evaluation dashboard',
+    year: '2026',
+    body:
+      'A portfolio-grade evaluator for prompt tests, scoring rubrics, failure categories, RAG evidence coverage, and hallucination detection. Built to show how I think about model quality, not just model outputs.',
+    stack: 'React · RAG eval · Prompt testing · Risk scoring',
+    link: '#llm-eval',
+    linkLabel: 'Open the dashboard',
+  },
+  {
     title: '3D brain-tumor segmentation',
     year: '2025',
     published: true,
@@ -126,6 +135,7 @@ export const honor = {
 export const sections = [
   ['about', 'About'],
   ['work', 'Work'],
+  ['llm-eval', 'LLM Eval'],
   ['publication', 'Paper'],
   ['experience', 'Experience'],
   ['skills', 'Skills'],

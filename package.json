@@ -7,7 +7,9 @@
   "description": "Yeabsira Dana — portfolio (React + Three.js / React Three Fiber)",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "node scripts/prepare-vite-entry.cjs && vite build",
+    "publish:pages": "node scripts/publish-pages-root.cjs",
+    "deploy:pages": "pnpm run build && pnpm run publish:pages",
     "preview": "vite preview"
   },
   "dependencies": {

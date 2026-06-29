@@ -11,8 +11,8 @@ export function TopNav() {
       <a href="#top" className="brand">Yeabsira&nbsp;Dana</a>
       <div className="nav-links">
         <a href="#work" className="l">Work</a>
+        <a href="#llm-eval" className="l">LLM Eval</a>
         <a href="#experience" className="l">Experience</a>
-        <a href="#skills" className="l">Skills</a>
         <a href={`mailto:${profile.email}`} className="btn btn-grad">Email me</a>
       </div>
     </nav>
@@ -127,7 +127,7 @@ export function Publication() {
     <section id="publication">
       <div className="wrap sec">
         <div className="sec-head reveal">
-          <span className="ix">03</span><h2>Publication</h2>
+          <span className="ix">04</span><h2>Publication</h2>
           <span className="sub">A differentiator most applicants don't carry.</span>
         </div>
         <div className="card pub-card reveal">
@@ -150,7 +150,7 @@ export function Experience() {
     <section id="experience">
       <div className="wrap sec">
         <div className="sec-head reveal">
-          <span className="ix">04</span><h2>Where I've worked</h2>
+          <span className="ix">05</span><h2>Where I've worked</h2>
           <span className="sub">Frontier-AI evaluation, full-stack engineering, and teaching.</span>
         </div>
         <div className="timeline stagger">
@@ -174,7 +174,7 @@ export function Skills() {
     <section id="skills">
       <div className="wrap sec">
         <div className="sec-head reveal">
-          <span className="ix">05</span><h2>What I use</h2>
+          <span className="ix">06</span><h2>What I use</h2>
           <span className="sub">Grouped by where it lives in the stack.</span>
         </div>
         <div className="skills stagger">
@@ -195,7 +195,7 @@ export function Education() {
     <section id="education">
       <div className="wrap sec">
         <div className="sec-head reveal">
-          <span className="ix">06</span><h2>Education</h2>
+          <span className="ix">07</span><h2>Education</h2>
           <span className="sub">Three countries, one through-line: AI.</span>
         </div>
         <div className="edu-grid reveal">
