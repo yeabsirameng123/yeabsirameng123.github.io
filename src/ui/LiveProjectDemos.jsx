@@ -45,6 +45,29 @@ const ragDocs = [
   },
 ]
 
+const demoProof = [
+  {
+    value: '0',
+    label: 'placeholder URLs',
+    detail: 'No empty Space links, hidden dead buttons, or download-only demos.',
+  },
+  {
+    value: '2',
+    label: 'on-page apps',
+    detail: 'SegViz and Ask My Docs both run directly inside this portfolio.',
+  },
+  {
+    value: '100%',
+    label: 'recruiter flow',
+    detail: 'Upload, test, inspect outputs, and judge the work without leaving the site.',
+  },
+  {
+    value: 'local',
+    label: 'file handling',
+    detail: 'Demo uploads stay in the browser session and are not stored on a server.',
+  },
+]
+
 const stopwords = new Set([
   'a', 'an', 'and', 'are', 'as', 'at', 'be', 'by', 'for', 'from', 'how', 'i', 'in',
   'is', 'it', 'me', 'my', 'of', 'on', 'or', 'the', 'this', 'to', 'use', 'what',
@@ -258,7 +281,7 @@ function SegVizDemo() {
           <span className="eval-kicker">Live computer vision demo</span>
           <h3>SegViz semantic segmentation</h3>
         </div>
-        <span className="demo-chip">runs in browser</span>
+        <span className="demo-chip">on-page app</span>
       </div>
       <div className="segviz-stage">
         <canvas ref={canvasRef} aria-label="Segmentation overlay preview" />
@@ -278,7 +301,7 @@ function SegVizDemo() {
         </label>
       </div>
       <div className="demo-note">
-        Previewing {imageName}. This in-page demo runs fully on GitHub Pages: upload a photo, adjust the overlay, and inspect the pixel-level scene breakdown without leaving the portfolio.
+        Previewing {imageName}. This in-page demo runs fully on GitHub Pages: upload a photo, adjust the overlay, and inspect the pixel-level scene breakdown without a Space URL or a download.
       </div>
       <div className="coverage-list">
         {coverage.map((item) => (
@@ -389,6 +412,9 @@ function RagDemo() {
               <span className="doc-pill" key={doc.id}>{doc.title}</span>
             ))}
           </div>
+          <div className="demo-note">
+            This recruiter-safe version demonstrates ingestion, retrieval, citation tracing, and failure handling directly in the browser.
+          </div>
         </div>
         <div className="rag-output">
           <span className="eval-kicker">Grounded answer</span>
@@ -417,7 +443,16 @@ export default function LiveProjectDemos() {
       <div className="wrap sec">
         <div className="sec-head reveal">
           <span className="ix">03</span><h2>Live project demos</h2>
-          <span className="sub">Everything here runs inside the portfolio. Upload, test, inspect, and ask without leaving the site.</span>
+          <span className="sub">No placeholders. No downloads. Everything here runs inside the portfolio so employers can upload, test, inspect, and ask without leaving the site.</span>
+        </div>
+        <div className="demo-proof-console reveal" aria-label="Live demo verification">
+          {demoProof.map((item) => (
+            <div className="demo-proof" key={item.label}>
+              <b>{item.value}</b>
+              <span>{item.label}</span>
+              <small>{item.detail}</small>
+            </div>
+          ))}
         </div>
         <div className="demo-grid reveal">
           <SegVizDemo />

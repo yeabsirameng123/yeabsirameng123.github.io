@@ -39,8 +39,8 @@ export const projects = [
     title: 'SegViz semantic segmentation',
     year: '2026',
     body:
-      'A live computer-vision app where someone uploads a photo and SegFormer labels every pixel. It returns a color overlay, a fade control, and scene-coverage analytics, with cached re-blending so the UI stays fast on free CPU hardware.',
-    stack: 'Python · PyTorch · SegFormer · Hugging Face · Gradio',
+      'A live computer-vision demo where someone uploads a photo, sees a semantic mask overlay, tunes the fade control, and gets scene-coverage analytics. The portfolio version runs in the browser for instant recruiter testing; the Python SegFormer/Gradio backend is ready for a hosted Space when a real URL is available.',
+    stack: 'Browser demo · Python backend design · SegFormer · Hugging Face-ready · Gradio',
     link: '#segviz-demo',
     linkLabel: 'Try live demo',
   },
@@ -48,8 +48,8 @@ export const projects = [
     title: 'Ask My Docs RAG',
     year: '2026',
     body:
-      'A Python + Gradio retrieval app that ingests documents, chunks them, embeds them with MiniLM, searches with FAISS, and generates grounded answers with citations. It can run locally or deploy to Hugging Face Spaces without paid API keys.',
-    stack: 'Python · FAISS · Sentence Transformers · Gradio · flan-t5',
+      'A live retrieval demo that lets employers upload documents, add notes, ask questions, and inspect citations directly on the portfolio. The full Python design uses MiniLM, FAISS, and Gradio; the GitHub Pages version keeps files private in the browser.',
+    stack: 'Browser RAG · Python backend design · FAISS · MiniLM · Gradio',
     link: '#rag-demo',
     linkLabel: 'Try live demo',
   },
