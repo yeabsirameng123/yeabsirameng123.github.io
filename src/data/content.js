@@ -36,6 +36,15 @@ export const projects = [
     linkLabel: 'Open the dashboard',
   },
   {
+    title: 'SegViz semantic segmentation',
+    year: '2026',
+    body:
+      'A live computer-vision app where someone uploads a photo and SegFormer labels every pixel. It returns a color overlay, a fade control, and scene-coverage analytics, with cached re-blending so the UI stays fast on free CPU hardware.',
+    stack: 'Python · PyTorch · SegFormer · Hugging Face · Gradio',
+    link: './yeabsira-segviz.zip',
+    linkLabel: 'Download source',
+  },
+  {
     title: 'Ask My Docs RAG',
     year: '2026',
     body:
@@ -119,7 +128,7 @@ export const jobs = [
 ]
 
 export const skills = [
-  { cat: 'Machine learning', items: 'Deep learning, CNNs, NLP, semantic segmentation, predictive modeling' },
+  { cat: 'Machine learning', items: 'Deep learning, CNNs, vision transformers, semantic segmentation, predictive modeling' },
   { cat: 'LLMs & NLP', items: 'RAG, FAISS, sentence-transformers, Hugging Face, LangChain, Haystack, spaCy, Gradio', feat: true },
   { cat: 'Frameworks', items: 'PyTorch, TensorFlow, Keras, FastAPI' },
   { cat: 'Languages', items: 'Python, C / C++, C#, Java, JavaScript, TypeScript, SQL' },
