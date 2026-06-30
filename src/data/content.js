@@ -9,7 +9,7 @@ export const profile = {
   linkedin: 'https://www.linkedin.com/in/yeabsira-mengistu/',
   paper: 'https://doi.org/10.1002/ima.70056',
   intro:
-    'I build machine learning systems at the point where research becomes useful software: model evaluation, computer vision, retrieval, and the backend layers that make them real.',
+    'I design AI systems that connect research with real software: computer vision pipelines, RAG applications, LLM evaluation tools, and production-ready interfaces.',
 }
 
 export const stats = [
