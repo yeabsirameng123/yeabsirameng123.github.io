@@ -40,12 +40,12 @@ export function Hero() {
         <div className="hero-meta">
           <span>{profile.role}</span>
           <span>{profile.location}</span>
-          <span className="av">Open to work</span>
+          <span className="av">Research to production</span>
         </div>
         <h1 className="name">Yeabsira <span className="gt">Dana</span></h1>
         <p className="hero-intro">
-          I build machine learning systems, and the software that puts them to use.
-          Right now I'm helping train and evaluate <b>frontier language models</b> at Handshake AI.
+          I build machine learning systems at the point where research becomes useful software:
+          <b> model evaluation</b>, computer vision, retrieval, and full-stack AI tools.
         </p>
         <div className="hero-cta">
           <a href="#work" className="btn btn-grad">See my work <span className="ar">↓</span></a>
@@ -76,8 +76,8 @@ export function About() {
           </div>
           <div className="about-copy">
             <p className="lead">
-              I build machine learning systems, and I care most that they hold up{' '}
-              <span className="gt">outside a demo.</span>
+              I care about models that can be{' '}
+              <span className="gt">measured, inspected, and used.</span>
             </p>
             {about.map((p, i) => (
               <p key={i} dangerouslySetInnerHTML={{ __html: p.replace('LLM work', '<b>LLM work</b>') }} />
@@ -95,7 +95,7 @@ export function Work() {
       <div className="wrap sec">
         <div className="sec-head reveal">
           <span className="ix">02</span><h2>Selected work</h2>
-          <span className="sub">Research and shipped software. The first one is peer-reviewed.</span>
+          <span className="sub">Applied AI systems, research projects, and production software.</span>
         </div>
         <div className="work stagger">
           {projects.map((p) => (
@@ -130,7 +130,7 @@ export function Publication() {
       <div className="wrap sec">
         <div className="sec-head reveal">
           <span className="ix">05</span><h2>Publication</h2>
-          <span className="sub">A differentiator most applicants don't carry.</span>
+          <span className="sub">Peer-reviewed work in medical-image segmentation.</span>
         </div>
         <div className="card pub-card reveal">
           <div className="pub-title">{publication.title}</div>
@@ -153,7 +153,7 @@ export function Experience() {
       <div className="wrap sec">
         <div className="sec-head reveal">
           <span className="ix">06</span><h2>Where I've worked</h2>
-          <span className="sub">Frontier-AI evaluation, full-stack engineering, and teaching.</span>
+          <span className="sub">Frontier-AI evaluation, software engineering, and teaching.</span>
         </div>
         <div className="timeline stagger">
           {jobs.map((j) => (
@@ -228,10 +228,10 @@ export function Contact() {
       <div className="wrap sec">
         <div className="reveal">
           <span className="mono" style={{ display: 'block', marginBottom: 22 }}>Get in touch</span>
-          <h2 className="big">Looking for an <span className="gt">ML engineering</span> role.</h2>
+          <h2 className="big">Building <span className="gt">applied AI systems</span> with research depth.</h2>
           <p className="lead">
-            Ideally somewhere I can keep one hand in research and still ship real things.
-            If that sounds like your team, say hello.
+            I like work that combines models, data, software, and clear evaluation.
+            For applied AI, ML engineering, or research-aligned collaborations, reach out.
           </p>
           <div className="contact-row">
             <a className="btn btn-grad" href={`mailto:${profile.email}`}>{profile.email}</a>

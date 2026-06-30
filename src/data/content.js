@@ -1,17 +1,15 @@
-// ────────────────────────────────────────────────────────────────────────────
 // Everything you'd want to edit lives here. Change the words, ship again.
-// ────────────────────────────────────────────────────────────────────────────
 
 export const profile = {
   name: 'Yeabsira Dana',
-  role: 'ML Engineer & Researcher',
+  role: 'Applied ML Engineer & Researcher',
   location: 'Washington, DC',
   email: 'yeabsiramengistu@gmail.com',
   phone: '+1 202-906-9509',
   linkedin: 'https://www.linkedin.com/in/yeabsira-mengistu/',
   paper: 'https://doi.org/10.1002/ima.70056',
   intro:
-    "I build machine learning systems, and the software that puts them to use. Right now I'm helping train and evaluate frontier language models at Handshake AI.",
+    'I build machine learning systems at the point where research becomes useful software: model evaluation, computer vision, retrieval, and the backend layers that make them real.',
 }
 
 export const stats = [
@@ -21,8 +19,8 @@ export const stats = [
 ]
 
 export const about = [
-  "My research has gone into outlining brain tumors in 3D MRI scans, building EEG interfaces for people who can't move or speak, and pulling the real shape of a process out of messy event logs. One of those turned into a published paper.",
-  "The other half of my work is shipping software — backends, APIs, and the pipelines that keep them alive — mostly in Python, Django, React, and AWS. Lately a lot of it has been LLM work: Hugging Face, LangChain, Haystack, that whole stack.",
+  'My work sits between research and product engineering. I have built 3D medical-imaging segmentation pipelines, EEG communication prototypes, graph-based process-mining systems, and applied LLM evaluation tools.',
+  'I care about systems that can be inspected: clear data flow, grounded outputs, measurable failure modes, and interfaces that make model behavior visible. My stack is Python, PyTorch, React, Django, FastAPI, PostgreSQL, Neo4j, Hugging Face, LangChain, Haystack, FAISS, and RAG.',
 ]
 
 export const projects = [
@@ -30,7 +28,7 @@ export const projects = [
     title: 'LLM evaluation dashboard',
     year: '2026',
     body:
-      'A portfolio-grade evaluator for prompt tests, scoring rubrics, failure categories, RAG evidence coverage, and hallucination detection. Built to show how I think about model quality, not just model outputs.',
+      'An interactive evaluation lab for prompt tests, scoring rubrics, failure categories, citation coverage, and hallucination triage. It treats model quality as something measurable: groundedness, instruction fit, evidence use, and risk control.',
     stack: 'React · RAG eval · Prompt testing · Risk scoring',
     link: '#llm-eval',
     linkLabel: 'Open the dashboard',
@@ -39,8 +37,8 @@ export const projects = [
     title: 'SegViz semantic segmentation',
     year: '2026',
     body:
-      'A live computer-vision demo where someone uploads a photo, sees a semantic mask overlay, tunes the fade control, and gets scene-coverage analytics. The portfolio version runs in the browser for instant recruiter testing; the Python SegFormer/Gradio backend is ready for a hosted Space when a real URL is available.',
-    stack: 'Browser demo · Python backend design · SegFormer · Hugging Face-ready · Gradio',
+      'An interactive semantic-segmentation workspace for image upload, mask visualization, overlay blending, class-color legends, and frame-coverage analytics. The live page runs the visual workflow in the browser; the production architecture maps cleanly to a SegFormer and Gradio service.',
+    stack: 'Computer vision · SegFormer · PyTorch · Gradio · React',
     link: '#segviz-demo',
     linkLabel: 'Try live demo',
   },
@@ -48,8 +46,8 @@ export const projects = [
     title: 'Ask My Docs RAG',
     year: '2026',
     body:
-      'A live retrieval demo that lets employers upload documents, add notes, ask questions, and inspect citations directly on the portfolio. The full Python design uses MiniLM, FAISS, and Gradio; the GitHub Pages version keeps files private in the browser.',
-    stack: 'Browser RAG · Python backend design · FAISS · MiniLM · Gradio',
+      'A document question-answering workspace that demonstrates the core RAG loop: ingestion, chunking, retrieval, grounded answer generation, and evidence tracing. The live version indexes pasted notes and uploaded files in the browser, then surfaces matching passages with citations.',
+    stack: 'RAG · FAISS · MiniLM · Sentence Transformers · Gradio',
     link: '#rag-demo',
     linkLabel: 'Try live demo',
   },
@@ -58,7 +56,7 @@ export const projects = [
     year: '2025',
     published: true,
     body:
-      "A deep learning pipeline that finds and outlines tumors in 3D MRI scans. The part I'm proud of is the data generator — I rebuilt how training samples get made and cleaned up, and that's what pushed the accuracy up on full 3D volumes. It's published in Wiley's International Journal of Imaging Systems and Technology.",
+      'A 3D U-Net pipeline for segmenting brain tumors in MRI volumes. I focused on the data generator and preprocessing path, improving how training samples are assembled for full-volume learning. Published in the International Journal of Imaging Systems and Technology.',
     stack: 'PyTorch · 3D U-Net · MRI · Python',
     link: 'https://doi.org/10.1002/ima.70056',
     linkLabel: 'Read the paper',
@@ -67,21 +65,21 @@ export const projects = [
     title: 'Process mining with graphs',
     year: '2024',
     body:
-      'A tool that pulls the real flow of a process out of large event logs — the path things actually take, not the one drawn on paper. I wrote the path-finding algorithm myself and ran everything through Neo4j, testing on public municipal records (the BPIC15 dataset).',
+      'A graph-based process-mining system for reconstructing real execution paths from event logs. I modeled cases and transitions in Neo4j, implemented path analysis in Python, and tested the workflow on the BPIC15 municipal-records dataset.',
     stack: 'Neo4j · Python · Pandas · Graphs',
   },
   {
     title: 'Full-stack analytics platform',
     year: '2024',
     body:
-      'An end-to-end data platform — Angular up front, Django and Postgres behind it, the whole thing containerized with Docker. Built with a small team so people could explore and manage their data in real time.',
+      'An end-to-end analytics platform with Angular on the frontend, Django and PostgreSQL behind it, and Docker for deployment. The system supported real-time data exploration, account flows, and structured backend APIs.',
     stack: 'Angular · Django · Postgres · Docker',
   },
   {
     title: 'NeuroTALK — an EEG interface',
     year: '2023',
     body:
-      'A low-cost EEG headset and the software to match, meant to help people who are paralyzed or locked-in communicate. Most of the work was in the signal processing and making it actually usable. This one stuck with me more than the rest.',
+      'An EEG-based communication prototype built around low-cost hardware, signal processing, and a usable interface. The project explored how brain-computer interfaces can support communication when speech and movement are limited.',
     stack: 'EEG · Signal processing · BCI · Python',
   },
 ]
@@ -90,7 +88,7 @@ export const publication = {
   title:
     '3D U-Net-Based Brain Tumor Semantic Segmentation Using a Modified Data Generator',
   body:
-    'My first paper. It walks through the U-Net setup and the custom data generator that did most of the heavy lifting on the segmentation accuracy.',
+    'Peer-reviewed work on 3D medical-image segmentation using a modified data generator for training U-Net models on MRI volumes.',
   venue: 'Int. Journal of Imaging Systems & Technology · 2025 · DOI 10.1002/ima.70056',
   link: 'https://doi.org/10.1002/ima.70056',
 }
@@ -102,28 +100,28 @@ export const jobs = [
     where: 'Handshake AI · Remote',
     current: true,
     body:
-      'I help train and evaluate large language models for frontier AI labs. In practice that means grading and ranking what the models say, writing tricky test cases, and trying to break them to find where they slip — all against fairly strict guidelines. My CS background pays off when the task is judging code or reasoning.',
+      'Evaluate and improve frontier language-model behavior through structured ranking, adversarial prompts, code and reasoning review, and failure analysis under strict quality guidelines.',
   },
   {
     role: 'Frontend Engineer',
     when: 'May — Aug 2024',
     where: 'ACSoftware S.r.l. · Italy',
     body:
-      'Built web apps for a software company in Italy — mostly e-commerce and e-learning. I owned the front end in React, wired up the auth (OAuth2, JWT, roles), and worked with the backend and design folks to actually get things shipped.',
+      'Built React interfaces for e-commerce and e-learning platforms, integrated OAuth2/JWT authentication flows, and collaborated across design and backend teams to ship production features.',
   },
   {
     role: 'Graduate Assistant & Instructor',
     when: 'Jan — Aug 2024',
     where: 'Università della Calabria · Italy',
     body:
-      'Ran the Python labs and taught alongside the regular coursework. I worked with around fifty students on debugging, algorithms, and getting unstuck, and did a lot of code reviews along the way.',
+      'Led Python lab sessions, supported coursework in programming and algorithms, reviewed student code, and helped roughly fifty students debug and reason through technical assignments.',
   },
   {
     role: 'Software Engineer Intern',
     when: 'Dec 2023 — Aug 2024',
     where: 'R.B. Software Center S.r.l. · Italy',
     body:
-      'My first real engineering job. I built backend services and APIs, set up CI/CD and testing, and wrote some data-processing automation — plus the security basics done properly: auth, encryption, that sort of thing.',
+      'Built backend services and APIs, wrote data-processing automation, contributed tests and CI/CD setup, and implemented security basics including authentication, encryption, and role-based access control.',
   },
 ]
 
@@ -147,7 +145,7 @@ export const education = [
 export const honor = {
   tag: 'Erasmus+ MoST scholarship',
   body:
-    "Picked for a year's academic exchange — from Università della Calabria over to Fairmont State University in the US (2024–2025).",
+    "Selected for a year-long academic exchange from Università della Calabria to Fairmont State University in the US.",
 }
 
 export const sections = [

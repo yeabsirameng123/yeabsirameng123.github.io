@@ -39,32 +39,9 @@ const ragDocs = [
   },
   {
     id: 'D5',
-    title: 'Deployment constraint',
+    title: 'Browser-first demo',
     text:
-      'GitHub Pages is static, so Python, PyTorch, FAISS, and Gradio backends need a hosted runtime such as Hugging Face Spaces for true server-side inference.',
-  },
-]
-
-const demoProof = [
-  {
-    value: '0',
-    label: 'placeholder URLs',
-    detail: 'No empty Space links, hidden dead buttons, or download-only demos.',
-  },
-  {
-    value: '2',
-    label: 'on-page apps',
-    detail: 'SegViz and Ask My Docs both run directly inside this portfolio.',
-  },
-  {
-    value: '100%',
-    label: 'recruiter flow',
-    detail: 'Upload, test, inspect outputs, and judge the work without leaving the site.',
-  },
-  {
-    value: 'local',
-    label: 'file handling',
-    detail: 'Demo uploads stay in the browser session and are not stored on a server.',
+      'The live portfolio demos run in the browser so the workflows are immediately inspectable: image overlays, document indexing, retrieval traces, and cited answers.',
   },
 ]
 
@@ -301,7 +278,7 @@ function SegVizDemo() {
         </label>
       </div>
       <div className="demo-note">
-        Previewing {imageName}. This in-page demo runs fully on GitHub Pages: upload a photo, adjust the overlay, and inspect the pixel-level scene breakdown without a Space URL or a download.
+        Previewing {imageName}. Upload a photo, adjust the overlay opacity, and inspect the pixel-level scene breakdown directly in the page.
       </div>
       <div className="coverage-list">
         {coverage.map((item) => (
@@ -388,7 +365,7 @@ function RagDemo() {
             <textarea
               value={customNote}
               onChange={(e) => setCustomNote(e.target.value)}
-              placeholder="Paste a short note, job description, project note, or README excerpt and ask about it."
+              placeholder="Paste a research note, model card, dataset note, or README excerpt and ask about it."
             />
           </label>
           <div className="demo-controls">
@@ -399,7 +376,7 @@ function RagDemo() {
             <button type="button" className="mini-btn" onClick={() => setUploadedDocs([])}>
               Clear uploads
             </button>
-            {['What does SegViz show?', 'What cannot GitHub Pages run?', 'Which project is published?'].map((item) => (
+            {['What does SegViz show?', 'How is the answer grounded?', 'Which project is published?'].map((item) => (
               <button type="button" className="mini-btn" key={item} onClick={() => setQuery(item)}>
                 {item}
               </button>
@@ -413,7 +390,7 @@ function RagDemo() {
             ))}
           </div>
           <div className="demo-note">
-            This recruiter-safe version demonstrates ingestion, retrieval, citation tracing, and failure handling directly in the browser.
+            The live version demonstrates ingestion, retrieval, citation tracing, and failure handling directly in the browser.
           </div>
         </div>
         <div className="rag-output">
@@ -443,16 +420,7 @@ export default function LiveProjectDemos() {
       <div className="wrap sec">
         <div className="sec-head reveal">
           <span className="ix">03</span><h2>Live project demos</h2>
-          <span className="sub">No placeholders. No downloads. Everything here runs inside the portfolio so employers can upload, test, inspect, and ask without leaving the site.</span>
-        </div>
-        <div className="demo-proof-console reveal" aria-label="Live demo verification">
-          {demoProof.map((item) => (
-            <div className="demo-proof" key={item.label}>
-              <b>{item.value}</b>
-              <span>{item.label}</span>
-              <small>{item.detail}</small>
-            </div>
-          ))}
+          <span className="sub">Two interactive systems running in the page: a vision overlay workflow and a grounded document QA workflow.</span>
         </div>
         <div className="demo-grid reveal">
           <SegVizDemo />
