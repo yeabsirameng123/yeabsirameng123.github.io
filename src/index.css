@@ -62,7 +62,7 @@ header.hero .wrap { position: relative; z-index: 1; }
 .hero-meta { display: flex; flex-wrap: wrap; gap: 9px 22px; margin-bottom: 30px; }
 .hero-meta span { font-family: var(--mono); font-size: 0.74rem; color: var(--faint); display: inline-flex; align-items: center; gap: 8px; }
 .hero-meta .av::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--a3); box-shadow: 0 0 10px var(--a3); }
-h1.name { font-family: var(--display); font-weight: 700; font-size: clamp(3.4rem, 10vw, 7.6rem); line-height: 0.92; letter-spacing: -0.04em; margin-bottom: 28px; }
+h1.name { font-family: "Inter", var(--display); font-weight: 900; font-size: clamp(4rem, 11vw, 8.7rem); line-height: 0.86; letter-spacing: -0.065em; margin-bottom: 30px; }
 .hero-intro { font-size: clamp(1.14rem, 2vw, 1.55rem); line-height: 1.48; color: var(--dim); max-width: 33ch; }
 .hero-intro b { color: var(--text); font-weight: 600; }
 .hero-cta { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 13px; }
