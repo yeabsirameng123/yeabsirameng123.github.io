@@ -107,7 +107,6 @@ section { position: relative; z-index: 1; }
 .stack { font-family: var(--mono); font-size: 0.72rem; color: var(--faint); }
 .pactions { display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
 .plink { font-size: 0.86rem; color: var(--text); display: inline-flex; align-items: center; gap: 7px; padding: 7px 14px; border: 1px solid var(--line-2); border-radius: 999px; transition: all .2s; }
-.plink.source { color: var(--dim); background: rgba(255,255,255,0.025); }
 .plink .ar { color: var(--a3); transition: transform .2s; }
 .plink:hover { border-color: rgba(255,255,255,0.3); background: rgba(255,255,255,0.05); }
 .plink:hover .ar { transform: translate(2px,-2px); }
@@ -135,6 +134,9 @@ section { position: relative; z-index: 1; }
 .rag-inputs label { display: grid; gap: 7px; color: var(--dim); font-size: 0.78rem; }
 .rag-inputs textarea { width: 100%; min-height: 112px; resize: vertical; color: var(--text); border: 1px solid var(--line); border-radius: 13px; background: rgba(0,0,0,0.46); padding: 12px; font: 0.84rem/1.5 var(--body); outline: none; }
 .rag-inputs textarea:focus { border-color: rgba(69,215,230,0.55); box-shadow: 0 0 0 3px rgba(69,215,230,0.1); }
+.index-strip { display: flex; align-items: center; flex-wrap: wrap; gap: 7px; color: var(--faint); font-size: 0.72rem; line-height: 1.35; margin-top: 2px; }
+.index-strip span { border: 1px solid var(--line); border-radius: 999px; background: rgba(255,255,255,0.03); padding: 5px 9px; }
+.index-strip .doc-pill { color: var(--text); border-color: rgba(69,215,230,0.28); background: rgba(69,215,230,0.06); overflow-wrap: anywhere; }
 .rag-output { border: 1px solid var(--line); border-radius: 14px; background: rgba(0,0,0,0.34); padding: 14px; min-width: 0; }
 .rag-output p { color: var(--text); font-size: 0.9rem; line-height: 1.55; margin: 10px 0 14px; }
 .evidence-stack { display: grid; gap: 9px; }

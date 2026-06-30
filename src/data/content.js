@@ -43,8 +43,6 @@ export const projects = [
     stack: 'Python · PyTorch · SegFormer · Hugging Face · Gradio',
     link: '#segviz-demo',
     linkLabel: 'Try live demo',
-    sourceLink: './yeabsira-segviz.zip',
-    sourceLabel: 'Source zip',
   },
   {
     title: 'Ask My Docs RAG',
@@ -54,8 +52,6 @@ export const projects = [
     stack: 'Python · FAISS · Sentence Transformers · Gradio · flan-t5',
     link: '#rag-demo',
     linkLabel: 'Try live demo',
-    sourceLink: './yeabsira-rag-demo.zip',
-    sourceLabel: 'Source zip',
   },
   {
     title: '3D brain-tumor segmentation',

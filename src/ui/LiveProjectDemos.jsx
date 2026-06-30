@@ -59,6 +59,33 @@ function tokens(text) {
     .filter((token) => token.length > 2 && !stopwords.has(token))
 }
 
+function chunkDocument(doc) {
+  const words = doc.text.replace(/\s+/g, ' ').trim().split(' ').filter(Boolean)
+  if (!words.length) return []
+  if (words.length <= 95) return [{ ...doc, chunk: 1 }]
+
+  const chunks = []
+  for (let start = 0; start < words.length; start += 72) {
+    const slice = words.slice(start, start + 95)
+    if (!slice.length) continue
+    chunks.push({
+      id: `${doc.id}.${chunks.length + 1}`,
+      title: `${doc.title} · chunk ${chunks.length + 1}`,
+      text: slice.join(' '),
+      chunk: chunks.length + 1,
+    })
+  }
+  return chunks
+}
+
+function buildIndex(customNote, uploadedDocs) {
+  const uploaded = uploadedDocs.flatMap((doc) => chunkDocument(doc))
+  const note = customNote.trim()
+    ? chunkDocument({ id: 'N1', title: 'Pasted note', text: customNote.trim() })
+    : []
+  return [...ragDocs.flatMap((doc) => chunkDocument(doc)), ...note, ...uploaded]
+}
+
 function createSampleScene() {
   const canvas = document.createElement('canvas')
   canvas.width = 760
@@ -251,7 +278,7 @@ function SegVizDemo() {
         </label>
       </div>
       <div className="demo-note">
-        Previewing {imageName}. The downloadable Python app runs the SegFormer model; this portfolio view makes the overlay and coverage workflow live on GitHub Pages.
+        Previewing {imageName}. This in-page demo runs fully on GitHub Pages: upload a photo, adjust the overlay, and inspect the pixel-level scene breakdown without leaving the portfolio.
       </div>
       <div className="coverage-list">
         {coverage.map((item) => (
@@ -267,26 +294,23 @@ function SegVizDemo() {
   )
 }
 
-function scoreDocs(query, customNote) {
-  const queryTokens = tokens(query)
-  const customDocs = customNote.trim()
-    ? [{ id: 'U1', title: 'User note', text: customNote.trim() }]
-    : []
-  const docs = [...ragDocs, ...customDocs]
+function scoreDocs(query, docs) {
+  const queryTokens = [...new Set(tokens(query))]
   const scored = docs.map((doc) => {
-    const body = tokens(`${doc.title} ${doc.text}`)
-    const hitCount = queryTokens.reduce((sum, token) => sum + (body.includes(token) ? 1 : 0), 0)
+    const body = new Set(tokens(`${doc.title} ${doc.text}`))
+    const matchedTerms = queryTokens.filter((token) => body.has(token))
+    const titleBoost = matchedTerms.some((token) => tokens(doc.title).includes(token)) ? 0.15 : 0
     return {
       ...doc,
-      score: queryTokens.length ? hitCount / queryTokens.length : 0,
-      hits: hitCount,
+      score: queryTokens.length ? Math.min(1, matchedTerms.length / queryTokens.length + titleBoost) : 0,
+      hits: matchedTerms,
     }
   })
   return scored.sort((a, b) => b.score - a.score).slice(0, 3)
 }
 
 function buildAnswer(query, hits) {
-  const useful = hits.filter((hit) => hit.hits > 0)
+  const useful = hits.filter((hit) => hit.hits.length > 0)
   if (!query.trim()) {
     return 'Ask a question about the projects and the retriever will ground the answer in the evidence cards.'
   }
@@ -301,9 +325,25 @@ function buildAnswer(query, hits) {
 function RagDemo() {
   const [query, setQuery] = useState('How does the RAG app keep answers grounded?')
   const [customNote, setCustomNote] = useState('')
-  const hits = useMemo(() => scoreDocs(query, customNote), [query, customNote])
+  const [uploadedDocs, setUploadedDocs] = useState([])
+  const index = useMemo(() => buildIndex(customNote, uploadedDocs), [customNote, uploadedDocs])
+  const hits = useMemo(() => scoreDocs(query, index), [query, index])
   const answer = useMemo(() => buildAnswer(query, hits), [query, hits])
-  const grounded = hits.filter((hit) => hit.hits > 0).length
+  const grounded = hits.filter((hit) => hit.hits.length > 0).length
+
+  const handleFiles = async (event) => {
+    const files = Array.from(event.target.files || [])
+    if (!files.length) return
+    const loaded = await Promise.all(
+      files.map(async (file, index) => ({
+        id: `U${uploadedDocs.length + index + 1}`,
+        title: file.name,
+        text: await file.text(),
+      }))
+    )
+    setUploadedDocs((docs) => [...docs, ...loaded])
+    event.target.value = ''
+  }
 
   return (
     <article className="demo-panel" id="rag-demo">
@@ -325,14 +365,28 @@ function RagDemo() {
             <textarea
               value={customNote}
               onChange={(e) => setCustomNote(e.target.value)}
-              placeholder="Paste a short note and ask about it."
+              placeholder="Paste a short note, job description, project note, or README excerpt and ask about it."
             />
           </label>
           <div className="demo-controls">
+            <label className="file-btn">
+              Upload docs
+              <input type="file" accept=".txt,.md,.csv,.json,.log" multiple onChange={handleFiles} />
+            </label>
+            <button type="button" className="mini-btn" onClick={() => setUploadedDocs([])}>
+              Clear uploads
+            </button>
             {['What does SegViz show?', 'What cannot GitHub Pages run?', 'Which project is published?'].map((item) => (
               <button type="button" className="mini-btn" key={item} onClick={() => setQuery(item)}>
                 {item}
               </button>
+            ))}
+          </div>
+          <div className="index-strip">
+            <span>{index.length} chunks indexed in this page</span>
+            <span>Files stay in your browser</span>
+            {uploadedDocs.map((doc) => (
+              <span className="doc-pill" key={doc.id}>{doc.title}</span>
             ))}
           </div>
         </div>
@@ -341,13 +395,13 @@ function RagDemo() {
           <p>{answer}</p>
           <div className="evidence-stack">
             {hits.map((hit) => (
-              <div className={`evidence-hit${hit.hits ? ' active' : ''}`} key={hit.id}>
+              <div className={`evidence-hit${hit.hits.length ? ' active' : ''}`} key={hit.id}>
                 <div>
                   <b>{hit.id}</b>
                   <span>{hit.title}</span>
                 </div>
                 <i style={{ width: `${Math.round(hit.score * 100)}%` }} />
-                <small>{Math.round(hit.score * 100)}% query overlap</small>
+                <small>{hit.hits.length ? hit.hits.join(', ') : 'no query terms matched'}</small>
               </div>
             ))}
           </div>
@@ -363,7 +417,7 @@ export default function LiveProjectDemos() {
       <div className="wrap sec">
         <div className="sec-head reveal">
           <span className="ix">03</span><h2>Live project demos</h2>
-          <span className="sub">Clickable demos first. Source downloads stay as proof, not the whole experience.</span>
+          <span className="sub">Everything here runs inside the portfolio. Upload, test, inspect, and ask without leaving the site.</span>
         </div>
         <div className="demo-grid reveal">
           <SegVizDemo />

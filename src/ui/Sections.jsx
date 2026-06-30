@@ -114,11 +114,6 @@ export function Work() {
                       {p.linkLabel} <Ar />
                     </a>
                   )}
-                  {p.sourceLink && (
-                    <a className="plink source" href={p.sourceLink} target="_blank" rel="noopener">
-                      {p.sourceLabel} <Ar />
-                    </a>
-                  )}
                 </div>
               </div>
             </article>
