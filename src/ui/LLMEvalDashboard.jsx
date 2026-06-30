@@ -204,7 +204,7 @@ export default function LLMEvalDashboard() {
     <section id="llm-eval" className="llm-lab">
       <div className="wrap sec">
         <div className="sec-head reveal">
-          <span className="ix">03</span>
+          <span className="ix">04</span>
           <h2>LLM evaluation dashboard</h2>
           <span className="sub">Prompt tests, scoring, RAG checks, and hallucination triage.</span>
         </div>

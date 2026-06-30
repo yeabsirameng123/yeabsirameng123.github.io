@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import Scene from './three/Scene.jsx'
 import { initSmoothScroll, destroySmoothScroll, initReveals } from './lib/smooth.js'
+import LiveProjectDemos from './ui/LiveProjectDemos.jsx'
 import LLMEvalDashboard from './ui/LLMEvalDashboard.jsx'
 import {
   TopNav, SideNav, Hero, About, Work, Publication,
@@ -43,7 +44,7 @@ export default function App() {
         },
         { rootMargin: '-45% 0px -50% 0px' }
       )
-      ;['about', 'work', 'llm-eval', 'publication', 'experience', 'skills', 'education', 'contact'].forEach(
+      ;['about', 'work', 'live-demos', 'llm-eval', 'publication', 'experience', 'skills', 'education', 'contact'].forEach(
         (id) => {
           const el = document.getElementById(id)
           if (el) spy.observe(el)
@@ -69,6 +70,7 @@ export default function App() {
       <main>
         <About />
         <Work />
+        <LiveProjectDemos />
         <LLMEvalDashboard />
         <Publication />
         <Experience />

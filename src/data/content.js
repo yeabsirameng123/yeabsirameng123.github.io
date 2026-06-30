@@ -41,8 +41,10 @@ export const projects = [
     body:
       'A live computer-vision app where someone uploads a photo and SegFormer labels every pixel. It returns a color overlay, a fade control, and scene-coverage analytics, with cached re-blending so the UI stays fast on free CPU hardware.',
     stack: 'Python · PyTorch · SegFormer · Hugging Face · Gradio',
-    link: './yeabsira-segviz.zip',
-    linkLabel: 'Download source',
+    link: '#segviz-demo',
+    linkLabel: 'Try live demo',
+    sourceLink: './yeabsira-segviz.zip',
+    sourceLabel: 'Source zip',
   },
   {
     title: 'Ask My Docs RAG',
@@ -50,8 +52,10 @@ export const projects = [
     body:
       'A Python + Gradio retrieval app that ingests documents, chunks them, embeds them with MiniLM, searches with FAISS, and generates grounded answers with citations. It can run locally or deploy to Hugging Face Spaces without paid API keys.',
     stack: 'Python · FAISS · Sentence Transformers · Gradio · flan-t5',
-    link: './yeabsira-rag-demo.zip',
-    linkLabel: 'Download source',
+    link: '#rag-demo',
+    linkLabel: 'Try live demo',
+    sourceLink: './yeabsira-rag-demo.zip',
+    sourceLabel: 'Source zip',
   },
   {
     title: '3D brain-tumor segmentation',
@@ -153,6 +157,7 @@ export const honor = {
 export const sections = [
   ['about', 'About'],
   ['work', 'Work'],
+  ['live-demos', 'Demos'],
   ['llm-eval', 'LLM Eval'],
   ['publication', 'Paper'],
   ['experience', 'Experience'],
