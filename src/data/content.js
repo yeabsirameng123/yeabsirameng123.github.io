@@ -36,6 +36,15 @@ export const projects = [
     linkLabel: 'Open the dashboard',
   },
   {
+    title: 'Ask My Docs RAG',
+    year: '2026',
+    body:
+      'A Python + Gradio retrieval app that ingests documents, chunks them, embeds them with MiniLM, searches with FAISS, and generates grounded answers with citations. It can run locally or deploy to Hugging Face Spaces without paid API keys.',
+    stack: 'Python · FAISS · Sentence Transformers · Gradio · flan-t5',
+    link: './yeabsira-rag-demo.zip',
+    linkLabel: 'Download source',
+  },
+  {
     title: '3D brain-tumor segmentation',
     year: '2025',
     published: true,
@@ -111,7 +120,7 @@ export const jobs = [
 
 export const skills = [
   { cat: 'Machine learning', items: 'Deep learning, CNNs, NLP, semantic segmentation, predictive modeling' },
-  { cat: 'LLMs & NLP', items: 'Hugging Face, LangChain, Haystack, spaCy, Gradio, Streamlit', feat: true },
+  { cat: 'LLMs & NLP', items: 'RAG, FAISS, sentence-transformers, Hugging Face, LangChain, Haystack, spaCy, Gradio', feat: true },
   { cat: 'Frameworks', items: 'PyTorch, TensorFlow, Keras, FastAPI' },
   { cat: 'Languages', items: 'Python, C / C++, C#, Java, JavaScript, TypeScript, SQL' },
   { cat: 'Data', items: 'Pandas, NumPy, Neo4j, PostgreSQL, graph analytics' },

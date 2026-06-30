@@ -16,9 +16,13 @@ for (const file of fs.readdirSync(assets)) {
   }
 }
 
-fs.copyFileSync(path.join(dist, 'index.html'), path.join(root, 'index.html'))
-fs.copyFileSync(path.join(dist, 'profile.jpg'), path.join(root, 'profile.jpg'))
 fs.writeFileSync(path.join(root, '.nojekyll'), '')
+
+for (const file of fs.readdirSync(dist)) {
+  const source = path.join(dist, file)
+  if (file === 'assets' || fs.statSync(source).isDirectory()) continue
+  fs.copyFileSync(source, path.join(root, file))
+}
 
 for (const file of fs.readdirSync(path.join(dist, 'assets'))) {
   fs.copyFileSync(path.join(dist, 'assets', file), path.join(assets, file))
