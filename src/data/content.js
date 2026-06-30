@@ -9,7 +9,7 @@ export const profile = {
   linkedin: 'https://www.linkedin.com/in/yeabsira-mengistu/',
   paper: 'https://doi.org/10.1002/ima.70056',
   intro:
-    'I design AI systems that connect research with real software: computer vision pipelines, RAG applications, LLM evaluation tools, and production-ready interfaces.',
+    "I build machine learning systems, and the software that puts them to use. Right now I'm helping train and evaluate frontier language models at Handshake AI.",
 }
 
 export const stats = [

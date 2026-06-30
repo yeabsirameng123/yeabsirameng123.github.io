@@ -44,9 +44,7 @@ export function Hero() {
         </div>
         <h1 className="name">Yeabsira <span className="gt">Dana</span></h1>
         <p className="hero-intro">
-          I design AI systems that connect research with real software:
-          <b> computer vision pipelines</b>, RAG applications, LLM evaluation tools,
-          and production-ready interfaces.
+          I build machine learning systems, and the software that puts them to use. Right now I'm helping train and evaluate frontier language models at Handshake AI.
         </p>
         <div className="hero-cta">
           <a href="#work" className="btn btn-grad">See my work <span className="ar">↓</span></a>
