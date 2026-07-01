@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 const segClasses = [
   { id: 'sky', label: 'Sky / open air', color: [76, 176, 255] },
@@ -12,79 +12,14 @@ const segClasses = [
 
 const segById = Object.fromEntries(segClasses.map((item) => [item.id, item]))
 
-const ragDocs = [
-  {
-    id: 'D1',
-    title: 'SegViz architecture',
-    text:
-      'SegViz accepts an image, runs a SegFormer semantic segmentation pipeline, blends a colored class mask over the photo, and reports scene coverage by class.',
-  },
-  {
-    id: 'D2',
-    title: 'RAG app architecture',
-    text:
-      'Ask My Docs chunks documents, embeds them with MiniLM, retrieves relevant passages with FAISS, and generates grounded answers with source citations.',
-  },
-  {
-    id: 'D3',
-    title: 'LLM evaluation dashboard',
-    text:
-      'The LLM evaluation dashboard scores prompt outputs for groundedness, instruction fit, citation use, risk control, failure categories, and hallucination triggers.',
-  },
-  {
-    id: 'D4',
-    title: 'Published segmentation research',
-    text:
-      'Yeabsira published 3D U-Net-Based Brain Tumor Semantic Segmentation Using a Modified Data Generator in the International Journal of Imaging Systems and Technology.',
-  },
-  {
-    id: 'D5',
-    title: 'Browser-first demo',
-    text:
-      'The live portfolio demos run in the browser so the workflows are immediately inspectable: image overlays, document indexing, retrieval traces, and cited answers.',
-  },
+const groundedSpaceUrl = 'https://yeabm2-grounded-rag.hf.space'
+const groundedRepoUrl = 'https://github.com/yeabsirameng123/grounded-rag'
+
+const groundedSignals = [
+  { label: 'Retrieval', value: 'source-backed answers' },
+  { label: 'Faithfulness', value: 'claim-level checks' },
+  { label: 'Demo test', value: 'catches a fabricated stat' },
 ]
-
-const stopwords = new Set([
-  'a', 'an', 'and', 'are', 'as', 'at', 'be', 'by', 'for', 'from', 'how', 'i', 'in',
-  'is', 'it', 'me', 'my', 'of', 'on', 'or', 'the', 'this', 'to', 'use', 'what',
-  'with', 'you',
-])
-
-function tokens(text) {
-  return text
-    .toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, ' ')
-    .split(/\s+/)
-    .filter((token) => token.length > 2 && !stopwords.has(token))
-}
-
-function chunkDocument(doc) {
-  const words = doc.text.replace(/\s+/g, ' ').trim().split(' ').filter(Boolean)
-  if (!words.length) return []
-  if (words.length <= 95) return [{ ...doc, chunk: 1 }]
-
-  const chunks = []
-  for (let start = 0; start < words.length; start += 72) {
-    const slice = words.slice(start, start + 95)
-    if (!slice.length) continue
-    chunks.push({
-      id: `${doc.id}.${chunks.length + 1}`,
-      title: `${doc.title} · chunk ${chunks.length + 1}`,
-      text: slice.join(' '),
-      chunk: chunks.length + 1,
-    })
-  }
-  return chunks
-}
-
-function buildIndex(customNote, uploadedDocs) {
-  const uploaded = uploadedDocs.flatMap((doc) => chunkDocument(doc))
-  const note = customNote.trim()
-    ? chunkDocument({ id: 'N1', title: 'Pasted note', text: customNote.trim() })
-    : []
-  return [...ragDocs.flatMap((doc) => chunkDocument(doc)), ...note, ...uploaded]
-}
 
 function createSampleScene() {
   const canvas = document.createElement('canvas')
@@ -294,121 +229,58 @@ function SegVizDemo() {
   )
 }
 
-function scoreDocs(query, docs) {
-  const queryTokens = [...new Set(tokens(query))]
-  const scored = docs.map((doc) => {
-    const body = new Set(tokens(`${doc.title} ${doc.text}`))
-    const matchedTerms = queryTokens.filter((token) => body.has(token))
-    const titleBoost = matchedTerms.some((token) => tokens(doc.title).includes(token)) ? 0.15 : 0
-    return {
-      ...doc,
-      score: queryTokens.length ? Math.min(1, matchedTerms.length / queryTokens.length + titleBoost) : 0,
-      hits: matchedTerms,
-    }
-  })
-  return scored.sort((a, b) => b.score - a.score).slice(0, 3)
-}
-
-function buildAnswer(query, hits) {
-  const useful = hits.filter((hit) => hit.hits.length > 0)
-  if (!query.trim()) {
-    return 'Ask a question about the projects and the retriever will ground the answer in the evidence cards.'
-  }
-  if (!useful.length) {
-    return 'I do not have enough evidence in the current notes to answer that safely. Add a note or ask about one of the portfolio projects.'
-  }
-  return useful
-    .map((hit) => `${hit.text} [${hit.id}]`)
-    .join(' ')
-}
-
-function RagDemo() {
-  const [query, setQuery] = useState('How does the RAG app keep answers grounded?')
-  const [customNote, setCustomNote] = useState('')
-  const [uploadedDocs, setUploadedDocs] = useState([])
-  const index = useMemo(() => buildIndex(customNote, uploadedDocs), [customNote, uploadedDocs])
-  const hits = useMemo(() => scoreDocs(query, index), [query, index])
-  const answer = useMemo(() => buildAnswer(query, hits), [query, hits])
-  const grounded = hits.filter((hit) => hit.hits.length > 0).length
-
-  const handleFiles = async (event) => {
-    const files = Array.from(event.target.files || [])
-    if (!files.length) return
-    const loaded = await Promise.all(
-      files.map(async (file, index) => ({
-        id: `U${uploadedDocs.length + index + 1}`,
-        title: file.name,
-        text: await file.text(),
-      }))
-    )
-    setUploadedDocs((docs) => [...docs, ...loaded])
-    event.target.value = ''
-  }
+function GroundedDemo() {
+  const [loaded, setLoaded] = useState(false)
 
   return (
-    <article className="demo-panel" id="rag-demo">
+    <article className="demo-panel grounded-demo" id="grounded-demo">
       <div className="demo-title-row">
         <div>
-          <span className="eval-kicker">Live retrieval demo</span>
-          <h3>Ask My Docs RAG</h3>
+          <span className="eval-kicker">Live self-evaluating RAG demo</span>
+          <h3>Grounded - self-evaluating RAG</h3>
         </div>
-        <span className="demo-chip">{grounded ? 'grounded' : 'needs evidence'}</span>
+        <span className="demo-chip">live Space</span>
       </div>
-      <div className="rag-demo-grid">
-        <div className="rag-inputs">
-          <label>
-            Question
-            <textarea value={query} onChange={(e) => setQuery(e.target.value)} />
-          </label>
-          <label>
-            Add a note to the index
-            <textarea
-              value={customNote}
-              onChange={(e) => setCustomNote(e.target.value)}
-              placeholder="Paste a research note, model card, dataset note, or README excerpt and ask about it."
-            />
-          </label>
-          <div className="demo-controls">
-            <label className="file-btn">
-              Upload docs
-              <input type="file" accept=".txt,.md,.csv,.json,.log" multiple onChange={handleFiles} />
-            </label>
-            <button type="button" className="mini-btn" onClick={() => setUploadedDocs([])}>
-              Clear uploads
+      <p className="grounded-copy">
+        Retrieval-augmented question answering that checks its own work: it answers from retrieved sources with citations,
+        breaks the answer into individual claims, verifies each claim against the sources, and flags anything unsupported.
+      </p>
+      <div className="grounded-signals">
+        {groundedSignals.map((signal) => (
+          <div className="evidence-hit active" key={signal.label}>
+            <div>
+              <b>{signal.label.slice(0, 2).toUpperCase()}</b>
+              <span>{signal.label}</span>
+            </div>
+            <small>{signal.value}</small>
+          </div>
+        ))}
+      </div>
+      <div className="grounded-stage">
+        {loaded ? (
+          <iframe
+            title="Grounded live RAG demo"
+            src={groundedSpaceUrl}
+            loading="lazy"
+            allow="clipboard-read; clipboard-write"
+          />
+        ) : (
+          <div className="grounded-poster" data-src={groundedSpaceUrl}>
+            <div>
+              <span className="eval-kicker">Ready to launch</span>
+              <strong>Open the live Gradio app inside this portfolio.</strong>
+              <small>Hit "Load worked example" and watch it catch the fabricated "about 80%" claim.</small>
+            </div>
+            <button type="button" className="btn btn-grad" onClick={() => setLoaded(true)}>
+              Launch live demo <span className="ar">↗</span>
             </button>
-            {['What does SegViz show?', 'How is the answer grounded?', 'Which project is published?'].map((item) => (
-              <button type="button" className="mini-btn" key={item} onClick={() => setQuery(item)}>
-                {item}
-              </button>
-            ))}
+            <span className="hint">First start can take about 30 seconds on the free Hugging Face tier.</span>
           </div>
-          <div className="index-strip">
-            <span>{index.length} chunks indexed in this page</span>
-            <span>Files stay in your browser</span>
-            {uploadedDocs.map((doc) => (
-              <span className="doc-pill" key={doc.id}>{doc.title}</span>
-            ))}
-          </div>
-          <div className="demo-note">
-            The live version demonstrates ingestion, retrieval, citation tracing, and failure handling directly in the browser.
-          </div>
-        </div>
-        <div className="rag-output">
-          <span className="eval-kicker">Grounded answer</span>
-          <p>{answer}</p>
-          <div className="evidence-stack">
-            {hits.map((hit) => (
-              <div className={`evidence-hit${hit.hits.length ? ' active' : ''}`} key={hit.id}>
-                <div>
-                  <b>{hit.id}</b>
-                  <span>{hit.title}</span>
-                </div>
-                <i style={{ width: `${Math.round(hit.score * 100)}%` }} />
-                <small>{hit.hits.length ? hit.hits.join(', ') : 'no query terms matched'}</small>
-              </div>
-            ))}
-          </div>
-        </div>
+        )}
+      </div>
+      <div className="demo-foot">
+        <a className="plink" href={groundedSpaceUrl} target="_blank" rel="noopener">Open in a new tab <span className="ar">↗</span></a>
+        <a className="plink" href={groundedRepoUrl} target="_blank" rel="noopener">View code <span className="ar">↗</span></a>
       </div>
     </article>
   )
@@ -420,11 +292,11 @@ export default function LiveProjectDemos() {
       <div className="wrap sec">
         <div className="sec-head reveal">
           <span className="ix">03</span><h2>Live project demos</h2>
-          <span className="sub">Two interactive systems running in the page: a vision overlay workflow and a grounded document QA workflow.</span>
+          <span className="sub">A live app I built, embedded right here - ask it something and watch it check its own answer.</span>
         </div>
-        <div className="demo-grid reveal">
-          <SegVizDemo />
-          <RagDemo />
+        <div className="demo-grid single-demo reveal">
+          {/* <SegVizDemo /> */}
+          <GroundedDemo />
         </div>
       </div>
     </section>

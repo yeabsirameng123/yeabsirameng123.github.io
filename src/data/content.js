@@ -39,17 +39,15 @@ export const projects = [
     body:
       'An interactive semantic-segmentation workspace for image upload, mask visualization, overlay blending, class-color legends, and frame-coverage analytics. The live page runs the visual workflow in the browser; the production architecture maps cleanly to a SegFormer and Gradio service.',
     stack: 'Computer vision · SegFormer · PyTorch · Gradio · React',
-    link: '#segviz-demo',
-    linkLabel: 'Try live demo',
   },
   {
-    title: 'Ask My Docs RAG',
+    title: 'Grounded - self-evaluating RAG',
     year: '2026',
     body:
-      'A document question-answering workspace that demonstrates the core RAG loop: ingestion, chunking, retrieval, grounded answer generation, and evidence tracing. The live version indexes pasted notes and uploaded files in the browser, then surfaces matching passages with citations.',
-    stack: 'RAG · FAISS · MiniLM · Sentence Transformers · Gradio',
-    link: '#rag-demo',
-    linkLabel: 'Try live demo',
+      'A deployed retrieval-augmented QA app that answers from sources, cites retrieved evidence, scores claim-level faithfulness, and flags unsupported statements so model behavior is inspectable.',
+    stack: 'RAG / Hugging Face / sentence-transformers / Gradio',
+    link: '#grounded-demo',
+    linkLabel: 'Open live demo',
   },
   {
     title: '3D brain-tumor segmentation',
