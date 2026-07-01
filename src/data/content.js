@@ -37,8 +37,10 @@ export const projects = [
     title: 'SegViz semantic segmentation',
     year: '2026',
     body:
-      'An interactive semantic-segmentation workspace for image upload, mask visualization, overlay blending, class-color legends, and frame-coverage analytics. The live page runs the visual workflow in the browser; the production architecture maps cleanly to a SegFormer and Gradio service.',
+      'A live semantic-segmentation app where a SegFormer transformer labels every pixel, returns a blended overlay and standalone mask, and reports class coverage across the frame.',
     stack: 'Computer vision · SegFormer · PyTorch · Gradio · React',
+    link: '#segviz-demo',
+    linkLabel: 'Open live demo',
   },
   {
     title: 'Grounded - self-evaluating RAG',
