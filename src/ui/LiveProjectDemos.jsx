@@ -1,9 +1,7 @@
 import { useState } from 'react'
 
 const segvizSpaceUrl = 'https://yeabm2-segviz.hf.space'
-const segvizRepoUrl = 'https://github.com/yeabsirameng123/segviz-semantic-segmentation'
 const groundedSpaceUrl = 'https://yeabm2-grounded-rag.hf.space'
-const groundedRepoUrl = 'https://github.com/yeabsirameng123/grounded-rag'
 
 const segvizSignals = [
   { label: 'Model', value: 'SegFormer-B0 transformer' },
@@ -42,7 +40,6 @@ function LiveSpaceDemo({
   copy,
   signals,
   url,
-  repoUrl,
   frameTitle,
   posterTitle,
   posterText,
@@ -85,7 +82,6 @@ function LiveSpaceDemo({
       </div>
       <div className="demo-foot">
         <a className="plink" href={url} target="_blank" rel="noopener">Open in a new tab <span className="ar">-&gt;</span></a>
-        <a className="plink" href={repoUrl} target="_blank" rel="noopener">View code <span className="ar">-&gt;</span></a>
       </div>
     </article>
   )
@@ -102,7 +98,6 @@ function SegVizLiveDemo() {
       copy="Upload any scene photo, or load the built-in sample. A SegFormer transformer labels every pixel, returns a blended overlay and standalone mask, then ranks the scene by class coverage."
       signals={segvizSignals}
       url={segvizSpaceUrl}
-      repoUrl={segvizRepoUrl}
       frameTitle="SegViz live semantic segmentation demo"
       posterTitle="Run real semantic segmentation inside this portfolio."
       posterText="Launch the Space, load the sample scene, or upload a photo to see the model produce a pixel-level mask and coverage breakdown."
@@ -122,7 +117,6 @@ function GroundedDemo() {
       copy="Retrieval-augmented question answering that checks its own work: it answers from retrieved sources with citations, breaks the answer into individual claims, verifies each claim, and flags anything unsupported."
       signals={groundedSignals}
       url={groundedSpaceUrl}
-      repoUrl={groundedRepoUrl}
       frameTitle="Grounded live RAG demo"
       posterTitle="Inspect a RAG answer that audits its own claims."
       posterText='Launch the app and hit "Load worked example" to watch it catch the fabricated "about 80%" claim.'
